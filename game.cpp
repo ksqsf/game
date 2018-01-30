@@ -30,6 +30,9 @@ int main()
 	}
 	
 	Framework framework(win, ren);
+	Scene scene(ren);
+	scene.add_object(new ImageObject(ren, "../background.bmp"));
+	framework.switch_scene(&scene);
 	framework.run();
 	
 	SDL_DestroyRenderer(ren);
