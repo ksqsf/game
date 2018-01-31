@@ -17,3 +17,19 @@ protected:
 struct ImageObject : Object {
 	ImageObject(SDL_Renderer *ren, const char *pathname);
 };
+
+struct HollowRectangle : Object {
+	HollowRectangle(SDL_Renderer *ren, SDL_Color color);
+	void draw() override;
+	
+private:
+	SDL_Color m_color;
+};
+
+struct FilledRectangle : Object {
+	FilledRectangle(SDL_Renderer *ren, SDL_Color color);
+	void draw() override;
+	
+private:
+	SDL_Color m_color;
+};

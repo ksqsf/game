@@ -29,9 +29,22 @@ int main()
 		std::exit(EXIT_FAILURE);
 	}
 	
+	if (SDL_SetRenderDrawBlendMode(ren, SDL_BLENDMODE_BLEND) != 0) {
+		log_error("INIT: Failed to set blend mode, expect to see weird graphics! %s\n", 
+			SDL_GetError());
+	}
+	
 	Framework framework(win, ren);
 	Scene scene(ren);
 	scene.add_object(new ImageObject(ren, "../background.bmp"));
+	FilledRectangle *rect = new FilledRectangle(ren, {0, 0, 255, 255});
+	rect->x = rect->y = 0;
+	rect->width = rect->height = 100;
+	scene.add_object(rect);
+	HollowRectangle *border = new HollowRectangle(ren, {255, 0, 0, 255});
+	border->x = border->y = 0;
+	border->width = border->height = 100;
+	scene.add_object(border);
 	framework.switch_scene(&scene);
 	framework.run();
 	
