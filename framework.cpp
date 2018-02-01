@@ -17,6 +17,11 @@ void Framework::switch_scene(Scene *scene)
 	m_curScene = scene;
 }
 
+void Framework::listen(const char *event_name, EventHandler handler)
+{
+	m_eventHandlers[event_name].push_back(handler);
+}
+
 void Framework::run()
 {
 	SDL_Event e {};
@@ -26,6 +31,11 @@ void Framework::run()
 			switch(e.type) {
 			case SDL_QUIT:
 				should_quit = true;
+				invoke_handlers("quit", e);
+				break;
+				
+			case SDL_MOUSEMOTION:
+				invoke_handlers("mouse-motion", e);
 				break;
 				
 			default:
@@ -36,5 +46,15 @@ void Framework::run()
 		m_curScene->draw();
 		SDL_RenderPresent(m_renderer);
 		SDL_Delay(1);
+	}
+}
+
+void Framework::invoke_handlers(const char *event_name, const SDL_Event& e)
+{
+	if (m_eventHandlers.count(event_name) == 0)
+		return;
+	
+	for (auto f : m_eventHandlers[event_name]) {
+		f(e);
 	}
 }

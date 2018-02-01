@@ -44,6 +44,13 @@ int main()
 	HollowRectangle *border = new HollowRectangle(ren, {255, 0, 0, 255});
 	border->x = border->y = 0;
 	border->width = border->height = 100;
+	
+	auto follow_mouse = [=](SDL_Event e) {
+		rect->x = border->x = e.motion.x;
+		rect->y = border->y = e.motion.y;
+	};
+	framework.listen("mouse-motion", follow_mouse);
+	
 	scene.add_object(border);
 	framework.switch_scene(&scene);
 	framework.run();
