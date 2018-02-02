@@ -36,7 +36,7 @@ int main()
 	
 	Framework framework(win, ren);
 	Scene scene(ren);
-	scene.add_object(new ImageObject(ren, "../background.bmp"));
+	scene.add_object(new ImageObject(ren, DATA_PATH "/background.bmp"));
 	FilledRectangle *rect = new FilledRectangle(ren, {0, 0, 255, 255});
 	rect->x = rect->y = 0;
 	rect->width = rect->height = 100;

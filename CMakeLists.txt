@@ -10,6 +10,8 @@ set(SOURCES
 	scene.cpp
 )
 
+add_definitions(-DDATA_PATH="${PROJECT_SOURCE_DIR}/data")
+
 add_executable(krush ${SOURCES})
 
 # link with SDL2
