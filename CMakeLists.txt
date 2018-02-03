@@ -7,6 +7,7 @@ set(SOURCES
 	game.cpp
 	logger.cpp
 	object.cpp
+	overlay.cpp
 	scene.cpp
 )
 

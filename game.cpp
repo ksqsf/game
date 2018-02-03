@@ -3,6 +3,7 @@
 
 #include "logger.h"
 #include "framework.h"
+#include "overlay.h"
 
 int main()
 {
@@ -36,14 +37,23 @@ int main()
 	
 	Framework framework(win, ren);
 	Scene scene(ren);
+	
 	scene.add_object(new ImageObject(ren, DATA_PATH "/background.bmp"));
+	
 	FilledRectangle *rect = new FilledRectangle(ren, {0, 0, 255, 255});
 	rect->x = rect->y = 0;
 	rect->width = rect->height = 100;
 	scene.add_object(rect);
+	
 	HollowRectangle *border = new HollowRectangle(ren, {255, 0, 0, 255});
 	border->x = border->y = 0;
 	border->width = border->height = 100;
+	scene.add_object(border);
+	
+	FilledRectangle *critical_region = new FilledRectangle(ren, {255, 255, 255, 255});
+	critical_region->x = critical_region->y = 400;
+	critical_region->width = critical_region->height = 50;
+	scene.add_object(critical_region);
 	
 	auto follow_mouse = [=](SDL_Event e) {
 		rect->x = border->x = e.motion.x;
@@ -51,7 +61,19 @@ int main()
 	};
 	framework.listen("mouse-motion", follow_mouse);
 	
-	scene.add_object(border);
+	auto move_back = [=](Object *a, Object *b) {
+		b->x = b->y = 0;
+		log_info("Moving rect touches the critical region!\n");
+	};
+	OverlayHandler overlay1(move_back);
+	OverlayHandler overlay2(move_back);
+	overlay1.add_object(critical_region);
+	overlay1.add_object(border);
+	overlay2.add_object(critical_region);
+	overlay2.add_object(rect);
+	framework.listen("mouse-motion", overlay1);
+	framework.listen("mouse-motion", overlay2);
+	
 	framework.switch_scene(&scene);
 	framework.run();
 	
