@@ -107,4 +107,6 @@ Text::Text(Graphics& g, const char *text, int size, SDL_Color color)
 	SDL_Surface* sur = TTF_RenderText_Solid(sans, text, color);
 	texture = SDL_CreateTextureFromSurface(m_renderer, sur);
 	SDL_FreeSurface(sur);
+	
+	SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 }
