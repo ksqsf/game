@@ -18,6 +18,11 @@ void Scene::add_object(Object *obj)
 	m_objectList.push_back(obj);
 }
 
+void Scene::listen(const char *event, EventHandler handler)
+{
+	m_eventHandlers[event].push_back(handler);
+}
+
 void Scene::draw()
 {
 	for (Object *pObj : m_objectList) {

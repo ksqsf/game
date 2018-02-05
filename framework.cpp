@@ -13,13 +13,7 @@ Framework::~Framework()
 
 void Framework::switch_scene(Scene *scene)
 {
-	m_eventHandlers.clear();
 	m_curScene = scene;
-}
-
-void Framework::listen(const char *event_name, EventHandler handler)
-{
-	m_eventHandlers[event_name].push_back(handler);
 }
 
 void Framework::run()
@@ -45,6 +39,7 @@ void Framework::run()
 		assert(m_curScene != nullptr);
 		SDL_RenderClear(m_renderer);
 		m_curScene->draw();
+		SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, 255);
 		SDL_RenderPresent(m_renderer);
 		SDL_Delay(1);
 	}
@@ -52,12 +47,12 @@ void Framework::run()
 
 void Framework::invoke_handlers(const char *event_name, const SDL_Event& e)
 {
-	if (m_eventHandlers.count(event_name) == 0) {
+	if (m_curScene->m_eventHandlers.count(event_name) == 0) {
 		return;
 	}
 	
 	// FIXME: potential race condition!
-	for (auto f : m_eventHandlers[event_name]) {
+	for (auto f : m_curScene->m_eventHandlers[event_name]) {
 		f(e);
 	}
 }
