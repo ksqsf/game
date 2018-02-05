@@ -8,7 +8,7 @@
 int main()
 {
 	// Initialize graphics.
-	Graphics g("Maze", 640, 480);
+	Graphics g("Test", 640, 480);
 	
 	// Create a framework over the window and the renderer.
 	Framework framework(g);
@@ -38,7 +38,7 @@ int main()
 		rect->x = e.motion.x - rect->width / 2;
 		rect->y = e.motion.y - rect->height / 2;
 	};
-	framework.listen("mouse-motion", follow_mouse);
+	scene.listen("mouse-motion", follow_mouse);
 	
 	// When your rectangle touches the critical region, move the rect back.
 	auto move_back = [=](Object *a, Object *b) {
@@ -48,7 +48,7 @@ int main()
 	OverlayHandler overlay2(move_back);
 	overlay2.add_object(critical_region);
 	overlay2.add_object(rect);
-	framework.listen("mouse-motion", overlay2);
+	scene.listen("mouse-motion", overlay2);
 	
 	// Switch to this scene, and run the event loop.
 	framework.run();
