@@ -14,6 +14,7 @@ int main()
 	// Create a framework over the window and the renderer.
 	Framework framework(g);
 	Scene scene(g);
+	framework.switch_scene(&scene);
 	
 	// Some dull objects
 	scene.add_object(new ImageObject(g, DATA_PATH "/background.bmp"));
@@ -51,6 +52,5 @@ int main()
 	framework.listen("mouse-motion", overlay2);
 	
 	// Switch to this scene, and run the event loop.
-	framework.switch_scene(&scene);
 	framework.run();
 }

@@ -13,6 +13,7 @@ Framework::~Framework()
 
 void Framework::switch_scene(Scene *scene)
 {
+	m_eventHandlers.clear();
 	m_curScene = scene;
 }
 
@@ -50,9 +51,11 @@ void Framework::run()
 
 void Framework::invoke_handlers(const char *event_name, const SDL_Event& e)
 {
-	if (m_eventHandlers.count(event_name) == 0)
+	if (m_eventHandlers.count(event_name) == 0) {
 		return;
+	}
 	
+	// FIXME: potential race condition!
 	for (auto f : m_eventHandlers[event_name]) {
 		f(e);
 	}
