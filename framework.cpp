@@ -40,6 +40,10 @@ void Framework::run()
 				invoke_handlers("mouse-button-up", e);
 				break;
 				
+			case SDL_KEYDOWN:
+				invoke_handlers("key-down", e);
+				break;
+				
 			default:
 				break;
 			}
