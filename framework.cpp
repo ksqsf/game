@@ -32,6 +32,14 @@ void Framework::run()
 				invoke_handlers("mouse-motion", e);
 				break;
 				
+			case SDL_MOUSEBUTTONDOWN:
+				invoke_handlers("mouse-button-down", e);
+				break;
+				
+			case SDL_MOUSEBUTTONUP:
+				invoke_handlers("mouse-button-up", e);
+				break;
+				
 			default:
 				break;
 			}
