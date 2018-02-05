@@ -5,6 +5,8 @@ struct Graphics final {
 	Graphics(const Graphics& rhs) = delete;
 	~Graphics();
 	
+	void warp_mouse(int x, int y);
+	
 	SDL_Renderer *renderer;
 	SDL_Window *window;
 };

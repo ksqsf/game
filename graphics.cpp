@@ -50,3 +50,8 @@ Graphics::~Graphics()
 		SDL_DestroyWindow(window);
 	SDL_Quit();
 }
+
+void Graphics::warp_mouse(int x, int y)
+{
+	SDL_WarpMouseInWindow(window, x, y);
+}
