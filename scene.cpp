@@ -1,8 +1,8 @@
 #include "exception.h"
 #include "scene.h"
 
-Scene::Scene(SDL_Renderer *ren)
-	: m_renderer(ren)
+Scene::Scene(Graphics& g)
+	: m_graphics(g)
 {
 }
 

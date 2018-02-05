@@ -6,13 +6,14 @@
 #include <unordered_map>
 #include <functional>
 
+#include "graphics.h"
 #include "scene.h"
 
 using EventHandler = std::function<void(SDL_Event)>;
 
 class Framework final {
 public:
-	Framework(SDL_Window *win, SDL_Renderer *ren);
+	Framework(const Graphics& graphics);
 	~Framework();
 	
 	void listen(const char *event_name, EventHandler handler);
@@ -24,7 +25,7 @@ private:
 	
 private:
 	Scene        *m_curScene;
-	SDL_Window   *m_window;
 	SDL_Renderer *m_renderer;
+	SDL_Window   *m_window;
 	std::unordered_map<std::string, std::vector<EventHandler>> m_eventHandlers;
 };

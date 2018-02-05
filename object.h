@@ -1,12 +1,13 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include "graphics.h"
 
 struct Object {
 	int x, y, width, height;
 	SDL_Texture *texture;
 	
-	explicit Object(SDL_Renderer *ren);
+	explicit Object(Graphics& g);
 	virtual ~Object();
 	virtual void draw();
 	
@@ -15,11 +16,11 @@ protected:
 };
 
 struct ImageObject : Object {
-	ImageObject(SDL_Renderer *ren, const char *pathname);
+	ImageObject(Graphics& g, const char *pathname);
 };
 
-struct HollowRectangle : virtual Object {
-	HollowRectangle(SDL_Renderer *ren, SDL_Color color);
+struct HollowRectangle : Object {
+	HollowRectangle(Graphics& g, SDL_Color color);
 	void draw() override;
 	
 private:
@@ -27,7 +28,7 @@ private:
 };
 
 struct FilledRectangle : Object {
-	FilledRectangle(SDL_Renderer *ren, SDL_Color color);
+	FilledRectangle(Graphics& g, SDL_Color color);
 	void draw() override;
 	
 private:
@@ -35,7 +36,7 @@ private:
 };
 
 struct Rectangle : Object {
-	Rectangle(SDL_Renderer *ren, SDL_Color fill, SDL_Color border);
+	Rectangle(Graphics& g, SDL_Color fill, SDL_Color border);
 	
 	void draw() override;
 	
@@ -45,5 +46,5 @@ private:
 };
 
 struct Text : Object {
-	Text(SDL_Renderer *ren, const char *text = nullptr, int size = 48, SDL_Color color = {255,255,255,255});
+	Text(Graphics& g, const char *text = nullptr, int size = 48, SDL_Color color = {255,255,255,255});
 };

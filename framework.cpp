@@ -1,10 +1,9 @@
 #include <cassert>
 #include "framework.h"
 
-Framework::Framework(SDL_Window *win, SDL_Renderer *ren)
-	: m_window(win)
-	, m_renderer(ren)
-	, m_curScene(nullptr)
+Framework::Framework(const Graphics& graphics)
+	: m_window(graphics.window)
+	, m_renderer(graphics.renderer)
 {
 }
 

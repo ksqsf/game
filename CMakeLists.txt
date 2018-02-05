@@ -4,7 +4,6 @@ set(CMAKE_BUILD_TYPE Debug)
 
 set(FRAMEWORK_SOURCES
 	framework.cpp
-	game.cpp
 	graphics.cpp
 	logger.cpp
 	object.cpp

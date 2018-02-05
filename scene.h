@@ -3,17 +3,18 @@
 #include <vector>
 #include <SDL2/SDL.h>
 
+#include "graphics.h"
 #include "object.h"
 
 class Scene {
 public:
-	Scene(SDL_Renderer *ren);
+	Scene(Graphics& g);
 	~Scene();
 	
 	void add_object(Object *obj);
 	void draw();
 	
 private:
-	SDL_Renderer *m_renderer;
+	Graphics& m_graphics;
 	std::vector<Object*> m_objectList;
 };

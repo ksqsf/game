@@ -7,8 +7,8 @@
 #include "exception.h"
 #include "object.h"
 
-Object::Object(SDL_Renderer *ren)
-	: m_renderer(ren)
+Object::Object(Graphics& g)
+	: m_renderer(g.renderer)
 	, texture(nullptr)
 {
 }
@@ -31,8 +31,8 @@ void Object::draw()
 	}
 }
 
-ImageObject::ImageObject(SDL_Renderer *ren, const char *pathname)
-	: Object(ren)
+ImageObject::ImageObject(Graphics& g, const char *pathname)
+	: Object(g)
 {
 	texture = IMG_LoadTexture(m_renderer, pathname);
 	if (!texture) {
@@ -42,8 +42,8 @@ ImageObject::ImageObject(SDL_Renderer *ren, const char *pathname)
 	x = y = 0;
 }
 
-HollowRectangle::HollowRectangle(SDL_Renderer *ren, SDL_Color color)
-	: Object(ren)
+HollowRectangle::HollowRectangle(Graphics& g, SDL_Color color)
+	: Object(g)
 	, m_color(color)
 {
 }
@@ -60,8 +60,8 @@ void HollowRectangle::draw()
 	}
 }
 
-FilledRectangle::FilledRectangle(SDL_Renderer *ren, SDL_Color color)
-	: Object(ren)
+FilledRectangle::FilledRectangle(Graphics& g, SDL_Color color)
+	: Object(g)
 	, m_color(color)
 {
 }
@@ -78,10 +78,10 @@ void FilledRectangle::draw()
 	}
 }
 
-Rectangle::Rectangle(SDL_Renderer *ren, SDL_Color fill, SDL_Color border)
-	: Object(ren)
-	, m_fill(ren, fill)
-	, m_border(ren, border)
+Rectangle::Rectangle(Graphics& g, SDL_Color fill, SDL_Color border)
+	: Object(g)
+	, m_fill(g, fill)
+	, m_border(g, border)
 {
 }
 
@@ -96,8 +96,8 @@ void Rectangle::draw()
 	m_border.draw();
 }
 
-Text::Text(SDL_Renderer *ren, const char *text, int size, SDL_Color color)
-	: Object(ren)
+Text::Text(Graphics& g, const char *text, int size, SDL_Color color)
+	: Object(g)
 {
 	TTF_Font *sans = TTF_OpenFont(DATA_PATH "/DejaVuSans.ttf", size);
 	if (sans == nullptr) {
