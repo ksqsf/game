@@ -13,6 +13,8 @@ This is a traditional maze game, in which you use your mouse to guide yourself t
 In the maze, the walls are toxic and you should never touch them! The exit is a green block. 
 Go there, as soon as possible!
 
+![Maze Map1](https://raw.githubusercontent.com/ksqsf/krush/master/screenshots/maze-map1.png)
+
 This game is not complete, and is not intended to be complete. You can change a line or two to make
 it harder or easier for you.
 
