@@ -7,6 +7,7 @@
 
 struct OverlayHandler {
 	OverlayHandler(std::function<void(Object *, Object *)> cb);
+	OverlayHandler(std::initializer_list<Object*> il, std::function<void(Object *, Object *)> cb);
 	void add_object(Object* obj);
 	void operator()(SDL_Event e);
 

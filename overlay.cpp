@@ -12,6 +12,13 @@ OverlayHandler::OverlayHandler(std::function<void(Object*, Object*)> cb)
 {
 }
 
+OverlayHandler::OverlayHandler(std::initializer_list<Object*> il,
+	std::function<void(Object*, Object*)> cb)
+	: m_callback(cb)
+	, m_objectList(il)
+{
+}
+
 void OverlayHandler::add_object(Object *obj)
 {
 	m_objectList.push_back(obj);
