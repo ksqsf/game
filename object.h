@@ -46,5 +46,5 @@ private:
 };
 
 struct Text : Object {
-	Text(Graphics& g, const char *text = nullptr, int size = 48, SDL_Color color = {255,255,255,255});
+	Text(Graphics& g, const char *text = nullptr, int size = 48, SDL_Color color = {0,0,0,255});
 };

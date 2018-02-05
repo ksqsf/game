@@ -10,7 +10,7 @@ struct OverlayHandler {
 	OverlayHandler(std::initializer_list<Object*> il, std::function<void(Object *, Object *)> cb);
 	void add_object(Object* obj);
 	void operator()(SDL_Event e);
-
+	
 private:
 	std::vector<Object *> m_objectList;
 	std::function<void(Object *, Object *)> m_callback;
