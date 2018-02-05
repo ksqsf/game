@@ -43,6 +43,7 @@ void Framework::run()
 			}
 		}
 		assert(m_curScene != nullptr);
+		SDL_RenderClear(m_renderer);
 		m_curScene->draw();
 		SDL_RenderPresent(m_renderer);
 		SDL_Delay(1);
