@@ -23,7 +23,7 @@ int begx, begy, endx, endy;
 static void load_mapfile(BlockType buf[scrh/block_size][scrw/block_size], const char *pathname);
 static SDL_Color get_color_by_type(BlockType type);
 
-int main()
+int main(int argc, char *argv[])
 {
 	load_mapfile(map1_buf, DATA_PATH "/map1.maze");
 	

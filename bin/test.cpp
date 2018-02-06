@@ -5,7 +5,7 @@
 #include <framework.h>
 #include <overlay.h>
 
-int main()
+int main(int argc, char *argv[])
 {
 	// Initialize graphics.
 	Graphics g("Test", 640, 480);
