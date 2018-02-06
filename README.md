@@ -5,8 +5,7 @@ game...?
 
 ## What is this, exactly?
 
-Currently, this repo contains a shabby game development framework. I believe it's capable of 
-doing very tiny and stupid games. Later I'll post one or two games in this framework as a proof.
+Currently, this repo contains a shabby game development framework and a shabby game using it.
 
 ## Maze Game （妹子游戏（划掉
 This is a traditional maze game, in which you use your mouse to guide yourself to leave a maze.

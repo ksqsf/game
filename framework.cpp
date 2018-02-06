@@ -1,4 +1,5 @@
 #include <cassert>
+#include <functional>
 #include "framework.h"
 
 Framework::Framework(const Graphics& graphics)
@@ -63,8 +64,15 @@ void Framework::invoke_handlers(const char *event_name, const SDL_Event& e)
 		return;
 	}
 	
-	// FIXME: potential race condition!
-	for (auto f : m_curScene->m_eventHandlers[event_name]) {
-		f(e);
+	std::vector<EventHandler> &handlers = m_curScene->m_eventHandlers[event_name];
+	std::vector<EventHandler> tmp;
+	for (auto f : handlers) {
+		if (f(e)) {
+			tmp.push_back(f);
+		}
+	}
+	handlers = std::move(tmp);
+	if (handlers.size() == 0) {
+		m_curScene->m_eventHandlers.erase(event_name);
 	}
 }

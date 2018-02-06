@@ -7,7 +7,7 @@
 #include "graphics.h"
 #include "object.h"
 
-using EventHandler = std::function<void(SDL_Event)>;
+using EventHandler = std::function<bool(SDL_Event)>;
 
 class Scene {
 	friend class Framework;

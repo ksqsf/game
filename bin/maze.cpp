@@ -46,6 +46,7 @@ int main()
 			sprite->x = e.motion.x - sprite->width/2;
 			sprite->y = e.motion.y - sprite->height/2;
 		}
+		return true;
 	});
 	map1.listen("mouse-button-down", [&](SDL_Event e) mutable {
 		if (begx <= e.motion.x && e.motion.x <= begx + sprite_size
@@ -53,10 +54,12 @@ int main()
 			game_running = true;
 		else
 			framework.switch_scene(&lost);
+		return true;
 	});
 	map1.listen("mouse-button-up", [&](SDL_Event e) mutable {
 		game_running = false;
 		framework.switch_scene(&lost);
+		return true;
 	});
 	
 	auto target = new FilledRectangle(g, {0, 255, 0, 255});
@@ -68,6 +71,7 @@ int main()
 	map1.listen("mouse-motion", OverlayHandler({sprite, target}, [&](Object*, Object*) {
 		game_running = false;
 		framework.switch_scene(&win);
+		return true;
 	}));
 	
 	for (int i = 0; i < scrh/block_size; ++i) {
@@ -83,6 +87,7 @@ int main()
 			map1.listen("mouse-motion", OverlayHandler({sprite, block}, [&](Object*, Object*) {
 				game_running = false;
 				framework.switch_scene(&lost);
+				return true;
 			}));
 		}
 	}
@@ -101,6 +106,7 @@ int main()
 		sprite->x = begx;
 		sprite->y = begy;
 		framework.switch_scene(&map1);
+		return true;
 	});
 	
 	// Win scene
@@ -117,6 +123,7 @@ int main()
 		sprite->x = begx;
 		sprite->y = begy;
 		framework.switch_scene(&map1);
+		return true;
 	});
 	
 	g.warp_mouse(begx, begy);

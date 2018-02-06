@@ -37,6 +37,7 @@ int main()
 	auto follow_mouse = [=](SDL_Event e) {
 		rect->x = e.motion.x - rect->width / 2;
 		rect->y = e.motion.y - rect->height / 2;
+		return true;
 	};
 	scene.listen("mouse-motion", follow_mouse);
 	
@@ -44,6 +45,7 @@ int main()
 	auto move_back = [=](Object *a, Object *b) {
 		b->x = b->y = 0;
 		log_info("Moving rect touches the critical region!\n");
+		return true;
 	};
 	OverlayHandler overlay2(move_back);
 	overlay2.add_object(critical_region);
