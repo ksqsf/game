@@ -4,5 +4,5 @@
 #include <stdexcept>
 
 struct SDLException : std::runtime_error {
-	explicit SDLException(const std::string& s) : std::runtime_error(s) { }
+	explicit SDLException(const std::string& s) noexcept : std::runtime_error(s) { }
 };

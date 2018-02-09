@@ -13,10 +13,10 @@ class Scene {
 	friend class Framework;
 	
 public:
-	Scene(Graphics& g);
-	~Scene();
+	Scene(Graphics& g) noexcept;
+	~Scene() noexcept;
 	
-	void add_object(Object *obj);
+	void add_object(Object *obj) noexcept;
 	void listen(const char *event, EventHandler handler);
 	void draw();
 	

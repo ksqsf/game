@@ -2,7 +2,7 @@
 #include <functional>
 #include "framework.h"
 
-Framework::Framework(const Graphics& graphics)
+Framework::Framework(const Graphics& graphics) noexcept
 	: m_window(graphics.window)
 	, m_renderer(graphics.renderer)
 {
@@ -12,7 +12,7 @@ Framework::~Framework()
 {
 }
 
-void Framework::switch_scene(Scene *scene)
+void Framework::switch_scene(Scene *scene) noexcept
 {
 	m_curScene = scene;
 }

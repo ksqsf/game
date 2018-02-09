@@ -7,13 +7,13 @@
 #include "exception.h"
 #include "object.h"
 
-Object::Object(Graphics& g)
+Object::Object(Graphics& g) noexcept
 	: m_renderer(g.renderer)
 	, texture(nullptr)
 {
 }
 
-Object::~Object()
+Object::~Object() noexcept
 {
 	// Be defensive.
 	if (texture) {

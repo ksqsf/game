@@ -1,19 +1,19 @@
 #include "exception.h"
 #include "scene.h"
 
-Scene::Scene(Graphics& g)
+Scene::Scene(Graphics& g) noexcept
 	: m_graphics(g)
 {
 }
 
-Scene::~Scene()
+Scene::~Scene() noexcept
 {
 	for (Object *pObj : m_objectList) {
 		delete pObj;
 	}
 }
 
-void Scene::add_object(Object *obj)
+void Scene::add_object(Object *obj) noexcept
 {
 	m_objectList.push_back(obj);
 }

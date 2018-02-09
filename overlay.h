@@ -6,8 +6,8 @@
 #include "object.h"
 
 struct OverlayHandler {
-	OverlayHandler(std::function<bool(Object *, Object *)> cb);
-	OverlayHandler(std::initializer_list<Object*> il, std::function<bool(Object *, Object *)> cb);
+	OverlayHandler(std::function<bool(Object *, Object *)> cb) noexcept;
+	OverlayHandler(std::initializer_list<Object*> il, std::function<bool(Object *, Object *)> cb) noexcept;
 	void add_object(Object* obj);
 	bool operator()(SDL_Event e);
 	

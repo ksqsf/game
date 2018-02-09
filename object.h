@@ -7,8 +7,8 @@ struct Object {
 	int x, y, width, height;
 	SDL_Texture *texture;
 	
-	explicit Object(Graphics& g);
-	virtual ~Object();
+	explicit Object(Graphics& g) noexcept;
+	virtual ~Object() noexcept;
 	virtual void draw();
 	
 protected:

@@ -42,7 +42,7 @@ Graphics::Graphics(const char *title, int w, int h)
 	}
 };
 
-Graphics::~Graphics()
+Graphics::~Graphics() noexcept
 {
 	if (renderer)
 		SDL_DestroyRenderer(renderer);
@@ -51,7 +51,7 @@ Graphics::~Graphics()
 	SDL_Quit();
 }
 
-void Graphics::warp_mouse(int x, int y)
+void Graphics::warp_mouse(int x, int y) noexcept
 {
 	SDL_WarpMouseInWindow(window, x, y);
 }

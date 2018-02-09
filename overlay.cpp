@@ -7,13 +7,13 @@ static bool within(int left /* x */, int top /* y */, Object *obj)
 	return x <= left && left <= x+w && y <= top && top <= y+h;
 }
 
-OverlayHandler::OverlayHandler(std::function<bool(Object*, Object*)> cb)
+OverlayHandler::OverlayHandler(std::function<bool(Object*, Object*)> cb) noexcept
 	: m_callback(cb)
 {
 }
 
 OverlayHandler::OverlayHandler(std::initializer_list<Object*> il,
-	std::function<bool(Object*, Object*)> cb)
+	std::function<bool(Object*, Object*)> cb) noexcept
 	: m_callback(cb)
 	, m_objectList(il)
 {
