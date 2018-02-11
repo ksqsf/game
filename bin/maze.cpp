@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 	sprite->width = sprite->height = sprite_size;
 	map1.add_object(sprite);
 	map1.listen("mouse-motion", [&](SDL_Event e) mutable {
+		// If the game is running (the mouse is held), the sprite should follow the mouse.
 		if (game_running) {
 			sprite->x = e.motion.x - sprite->width/2;
 			sprite->y = e.motion.y - sprite->height/2;
@@ -49,6 +50,8 @@ int main(int argc, char *argv[])
 		return true;
 	});
 	map1.listen("mouse-button-down", [&](SDL_Event e) mutable {
+		// If the game is not running, and the player clicks inside the sprite, the game is on.
+		// If the player clicks another place, (s)he will lost immediately.
 		if (begx <= e.motion.x && e.motion.x <= begx + sprite_size
 			&& begy <= e.motion.y && e.motion.y <= begy + sprite_size)
 			game_running = true;
@@ -57,6 +60,8 @@ int main(int argc, char *argv[])
 		return true;
 	});
 	map1.listen("mouse-button-up", [&](SDL_Event e) mutable {
+		// If the player releases the mouse before (s)he reaches the target, (s)he will immediately
+		// lose the game.
 		game_running = false;
 		framework.switch_scene(&lost);
 		return true;
@@ -69,6 +74,8 @@ int main(int argc, char *argv[])
 	map1.add_object(target);
 	
 	map1.listen("mouse-motion", OverlayHandler({sprite, target}, [&](Object*, Object*) {
+		// If the player reaches the target, (s)he will win, and the game will not be running
+		// anymore.
 		game_running = false;
 		framework.switch_scene(&win);
 		return true;
@@ -85,6 +92,7 @@ int main(int argc, char *argv[])
 			block->width = block->height = block_size;
 			map1.add_object(block);
 			map1.listen("mouse-motion", OverlayHandler({sprite, block}, [&](Object*, Object*) {
+				// If the player touches any of the rectangle, (s)he will lose the game.
 				game_running = false;
 				framework.switch_scene(&lost);
 				return true;
