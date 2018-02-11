@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SDL2/SDL.h>
+
 struct Graphics final {
 	Graphics(const char *title, int width, int height);
 	Graphics(const Graphics& rhs) = delete;

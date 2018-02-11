@@ -12,7 +12,7 @@ Framework::~Framework()
 {
 }
 
-void Framework::switch_scene(Scene *scene) noexcept
+void Framework::switch_scene(std::shared_ptr<Scene> scene) noexcept
 {
 	m_curScene = scene;
 }

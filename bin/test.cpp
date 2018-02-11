@@ -12,26 +12,26 @@ int main(int argc, char *argv[])
 	
 	// Create a framework over the window and the renderer.
 	Framework framework(g);
-	Scene scene(g);
-	framework.switch_scene(&scene);
+	auto scene = std::make_shared<Scene>(g);
+	framework.switch_scene(scene);
 	
 	// Some dull objects
-	scene.add_object(new ImageObject(g, DATA_PATH "/background.bmp"));
+	scene->add_object(new ImageObject(g, DATA_PATH "/background.bmp"));
 	
 	Rectangle *rect = new Rectangle(g, {0, 0, 255, 255}, {255, 0, 0, 255});
 	rect->x = rect->y = 0;
 	rect->width = rect->height = 200;
-	scene.add_object(rect);
+	scene->add_object(rect);
 	
 	FilledRectangle *critical_region = new FilledRectangle(g, {255, 255, 255, 255});
 	critical_region->x = critical_region->y = 400;
 	critical_region->width = critical_region->height = 50;
-	scene.add_object(critical_region);
+	scene->add_object(critical_region);
 	
 	Text *text = new Text(g, "hello world!");
 	text->x = text->y = 200;
 	text->width = text->height = 200;
-	scene.add_object(text);
+	scene->add_object(text);
 	
 	// Make the rectangle follow your mouse
 	auto follow_mouse = [=](SDL_Event e) {
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 		rect->y = e.motion.y - rect->height / 2;
 		return true;
 	};
-	scene.listen("mouse-motion", follow_mouse);
+	scene->listen("mouse-motion", follow_mouse);
 	
 	// When your rectangle touches the critical region, move the rect back.
 	auto move_back = [=](Object *a, Object *b) {
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 	OverlayHandler overlay2(move_back);
 	overlay2.add_object(critical_region);
 	overlay2.add_object(rect);
-	scene.listen("mouse-motion", overlay2);
+	scene->listen("mouse-motion", overlay2);
 	
 	// Switch to this scene, and run the event loop.
 	framework.run();

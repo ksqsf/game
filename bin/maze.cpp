@@ -31,17 +31,17 @@ int main(int argc, char *argv[])
 	Graphics g("Maze", scrw, scrh);
 	Framework framework(g);
 	
-	Scene lost(g);
-	Scene win(g);
-	Scene map1(g);
+	auto lost = make_shared<Scene>(g);
+	auto win = make_shared<Scene>(g);
+	auto map1 = make_shared<Scene>(g);
 	
 	// Map1 scene
 	auto sprite = new ImageObject(g, DATA_PATH "/sprites.png");
 	sprite->x = begx;
 	sprite->y = begy;
 	sprite->width = sprite->height = sprite_size;
-	map1.add_object(sprite);
-	map1.listen("mouse-motion", [&](SDL_Event e) mutable {
+	map1->add_object(sprite);
+	map1->listen("mouse-motion", [&](SDL_Event e) mutable {
 		// If the game is running (the mouse is held), the sprite should follow the mouse.
 		if (game_running) {
 			sprite->x = e.motion.x - sprite->width/2;
@@ -49,21 +49,21 @@ int main(int argc, char *argv[])
 		}
 		return true;
 	});
-	map1.listen("mouse-button-down", [&](SDL_Event e) mutable {
+	map1->listen("mouse-button-down", [&](SDL_Event e) mutable {
 		// If the game is not running, and the player clicks inside the sprite, the game is on.
 		// If the player clicks another place, (s)he will lost immediately.
 		if (begx <= e.motion.x && e.motion.x <= begx + sprite_size
 			&& begy <= e.motion.y && e.motion.y <= begy + sprite_size)
 			game_running = true;
 		else
-			framework.switch_scene(&lost);
+			framework.switch_scene(lost);
 		return true;
 	});
-	map1.listen("mouse-button-up", [&](SDL_Event e) mutable {
+	map1->listen("mouse-button-up", [&](SDL_Event e) mutable {
 		// If the player releases the mouse before (s)he reaches the target, (s)he will immediately
 		// lose the game.
 		game_running = false;
-		framework.switch_scene(&lost);
+		framework.switch_scene(lost);
 		return true;
 	});
 	
@@ -71,13 +71,13 @@ int main(int argc, char *argv[])
 	target->x = endx;
 	target->y = endy;
 	target->width = target->height = block_size;
-	map1.add_object(target);
+	map1->add_object(target);
 	
-	map1.listen("mouse-motion", OverlayHandler({sprite, target}, [&](Object*, Object*) {
+	map1->listen("mouse-motion", OverlayHandler({sprite, target}, [&](Object*, Object*) {
 		// If the player reaches the target, (s)he will win, and the game will not be running
 		// anymore.
 		game_running = false;
-		framework.switch_scene(&win);
+		framework.switch_scene(win);
 		return true;
 	}));
 	
@@ -90,11 +90,11 @@ int main(int argc, char *argv[])
 			block->x = j*block_size;
 			block->y = i*block_size;
 			block->width = block->height = block_size;
-			map1.add_object(block);
-			map1.listen("mouse-motion", OverlayHandler({sprite, block}, [&](Object*, Object*) {
+			map1->add_object(block);
+			map1->listen("mouse-motion", OverlayHandler({sprite, block}, [&](Object*, Object*) {
 				// If the player touches any of the rectangle, (s)he will lose the game.
 				game_running = false;
-				framework.switch_scene(&lost);
+				framework.switch_scene(lost);
 				return true;
 			}));
 		}
@@ -107,13 +107,13 @@ int main(int argc, char *argv[])
 	lost_msg->y = (scrh - lost_msg->height) / 2;
 	retry_msg->x = lost_msg->x + lost_msg->width/2 - retry_msg->width/2;
 	retry_msg->y = lost_msg->y + lost_msg->height/2 + retry_msg->height;
-	lost.add_object(lost_msg);
-	lost.add_object(retry_msg);
-	lost.listen("key-down", [&](SDL_Event e) mutable {
+	lost->add_object(lost_msg);
+	lost->add_object(retry_msg);
+	lost->listen("key-down", [&](SDL_Event e) mutable {
 		game_running = false;
 		sprite->x = begx;
 		sprite->y = begy;
-		framework.switch_scene(&map1);
+		framework.switch_scene(map1);
 		return true;
 	});
 	
@@ -124,18 +124,18 @@ int main(int argc, char *argv[])
 	win_msg->y = (scrh - win_msg->height) / 2;
 	restart_msg->x = lost_msg->x + lost_msg->width/2 - restart_msg->width/2;
 	restart_msg->y = lost_msg->y + lost_msg->height/2 + restart_msg->height;
-	win.add_object(win_msg);
-	win.add_object(restart_msg);
-	win.listen("key-down", [&](SDL_Event e) mutable {
+	win->add_object(win_msg);
+	win->add_object(restart_msg);
+	win->listen("key-down", [&](SDL_Event e) mutable {
 		game_running = false;
 		sprite->x = begx;
 		sprite->y = begy;
-		framework.switch_scene(&map1);
+		framework.switch_scene(map1);
 		return true;
 	});
 	
 	g.warp_mouse(begx, begy);
-	framework.switch_scene(&map1);
+	framework.switch_scene(map1);
 	framework.run();
 }
 
