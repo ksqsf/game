@@ -12,7 +12,7 @@ class Framework final {
 public:
 	Framework(const Graphics& graphics) noexcept;
 	Framework(const Framework& rhs) = delete;
-	~Framework() noexcept;
+	~Framework();
 	
 	void run();
 	void switch_scene(std::shared_ptr<Scene> scene) noexcept;

@@ -17,7 +17,7 @@ class Scene {
 	
 public:
 	Scene(Graphics& g) noexcept;
-	~Scene() noexcept;
+	~Scene();
 	
 	void add_object(Object *obj) noexcept;
 	void listen(const char *event, EventHandler handler);

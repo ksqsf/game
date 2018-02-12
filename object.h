@@ -8,7 +8,7 @@ struct Object {
 	SDL_Texture *texture;
 	
 	explicit Object(Graphics& g) noexcept;
-	virtual ~Object() noexcept;
+	virtual ~Object();
 	virtual void draw();
 	
 protected:

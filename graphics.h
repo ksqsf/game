@@ -5,7 +5,7 @@
 struct Graphics final {
 	Graphics(const char *title, int width, int height);
 	Graphics(const Graphics& rhs) = delete;
-	~Graphics() noexcept;
+	~Graphics();
 	
 	void warp_mouse(int x, int y) noexcept;
 	
