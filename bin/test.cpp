@@ -47,10 +47,24 @@ int main(int argc, char *argv[])
 		log_info("Moving rect touches the critical region!\n");
 		return true;
 	};
-	OverlayHandler overlay2(move_back);
-	overlay2.add_object(critical_region);
-	overlay2.add_object(rect);
-	scene->listen("mouse-motion", overlay2);
+	OverlayHandler overlay(move_back);
+	overlay.add_object(critical_region);
+	overlay.add_object(rect);
+	scene->listen("mouse-motion", overlay);
+	
+	// Move the critical region slowly
+	int dx = 1, dy = 1;
+	scene->alarm(1, [=]() mutable {
+		critical_region->x += dx;
+		critical_region->y += dy;
+		if (critical_region->x + critical_region->width >= 640 || critical_region->x <= 0) {
+			dx = -dx;
+		}
+		if (critical_region->y + critical_region->height >= 480 || critical_region->y <= 0) {
+			dy = -dy;
+		}
+		return true; // do not remove this handler
+	});
 	
 	// Switch to this scene, and run the event loop.
 	framework.run();

@@ -81,7 +81,7 @@ void Framework::invoke_handlers(const char *event_name, const SDL_Event& e)
 void Framework::invoke_alarms()
 {
 	auto& pq = m_curScene->m_alarmHandlers;
-	while (!pq.empty() && pq.top().time > SDL_GetTicks()) {
+	while (!pq.empty() && pq.top().time <= SDL_GetTicks()) {
 		auto cur = pq.top(); pq.pop();
 		if (cur.handler()) {
 			m_curScene->alarm(cur.interval, std::move(cur.handler));
