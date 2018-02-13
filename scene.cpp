@@ -23,6 +23,11 @@ void Scene::listen(const char *event, EventHandler handler)
 	m_eventHandlers[event].push_back(handler);
 }
 
+void Scene::alarm(uint32_t ms, AlarmHandler handler)
+{
+	m_alarmHandlers.push({SDL_GetTicks() + ms, ms, handler});
+}
+
 void Scene::draw()
 {
 	for (Object *pObj : m_objectList) {

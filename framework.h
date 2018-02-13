@@ -19,6 +19,7 @@ public:
 	
 private:
 	void invoke_handlers(const char *event_name, const SDL_Event& e);
+	void invoke_alarms();
 	
 private:
 	std::shared_ptr<Scene> m_curScene;
