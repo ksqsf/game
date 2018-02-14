@@ -28,3 +28,7 @@ target_link_libraries(tester ${SDL2_LIBRARIES} ${SDL2_image_LIBRARIES} ${SDL2_tt
 # maze
 add_executable(maze bin/maze.cpp ${FRAMEWORK_SOURCES})
 target_link_libraries(maze ${SDL2_LIBRARIES} ${SDL2_image_LIBRARIES} ${SDL2_ttf_LIBRARIES})
+
+# rush
+add_executable(rush bin/rush.cpp ${FRAMEWORK_SOURCES})
+target_link_libraries(rush ${SDL2_LIBRARIES} ${SDL2_image_LIBRARIES} ${SDL2_ttf_LIBRARIES})
