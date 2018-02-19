@@ -25,7 +25,10 @@ static SDL_Color get_color_by_type(BlockType type);
 
 int main(int argc, char *argv[])
 {
-	load_mapfile(map1_buf, DATA_PATH "/map1.maze");
+	if (argc != 2)
+		load_mapfile(map1_buf, DATA_PATH "/map1.maze");
+	else
+		load_mapfile(map1_buf, argv[1]);
 	
 	// Game
 	Graphics g("Maze", scrw, scrh);
