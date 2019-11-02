@@ -6,7 +6,7 @@ Scene::Scene(Graphics& g) noexcept
 {
 }
 
-Scene::~Scene() noexcept
+Scene::~Scene()
 {
 	for (Object *pObj : m_objectList) {
 		delete pObj;

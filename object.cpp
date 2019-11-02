@@ -1,7 +1,7 @@
 #include <cassert>
 
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include "logger.h"
 #include "exception.h"
@@ -13,7 +13,7 @@ Object::Object(Graphics& g) noexcept
 {
 }
 
-Object::~Object() noexcept
+Object::~Object()
 {
 	// Be defensive.
 	if (texture) {

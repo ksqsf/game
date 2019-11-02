@@ -6,7 +6,7 @@
 #include <functional>
 #include <unordered_map>
 #include <string>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include "framework.h"
 #include "graphics.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 struct Graphics final {
 	Graphics(const char *title, int width, int height);

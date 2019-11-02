@@ -1,5 +1,5 @@
 #include <cstdlib>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include <logger.h>
 #include <framework.h>

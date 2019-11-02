@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <functional>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "object.h"
 
 struct OverlayHandler {

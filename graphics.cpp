@@ -1,5 +1,5 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL.h>
+#include <SDL_ttf.h>
 #include "exception.h"
 #include "logger.h"
 #include "graphics.h"
@@ -42,7 +42,7 @@ Graphics::Graphics(const char *title, int w, int h)
 	}
 };
 
-Graphics::~Graphics() noexcept
+Graphics::~Graphics()
 {
 	if (renderer)
 		SDL_DestroyRenderer(renderer);
